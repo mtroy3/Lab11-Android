@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -63,11 +64,13 @@ public final class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "",
+                    "https://kitsu.io/api/edge/anime?filter[text]=cowboy%20bebop",
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
+                            final TextView helloTextView = (TextView) findViewById(R.id.jsonResult);
+                            helloTextView.setText(response.toString());
                             Log.d(TAG, response.toString());
                         }
                     }, new Response.ErrorListener() {
